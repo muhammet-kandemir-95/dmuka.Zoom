@@ -99,10 +99,10 @@ dmuka.Zoom = function (parameters) {
         var sumMatrix = [];
         if (e.wheelDelta < 0) {
             //scroll down
-            sumMatrix = [-1 * (elementMatrix[0] / 1) * this._dmuka.Zoom.private.variable.increment, 0, 0, -1 * (elementMatrix[3] / 1) * this._dmuka.Zoom.private.variable.increment, 0, 0];
+            sumMatrix = [-1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, -1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
         } else {
             //scroll up
-            sumMatrix = [1 * (elementMatrix[0] / 1) * this._dmuka.Zoom.private.variable.increment, 0, 0, 1 * (elementMatrix[3] / 1) * this._dmuka.Zoom.private.variable.increment, 0, 0];
+            sumMatrix = [1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, 1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
         }
 
         var lastMatrix = this._dmuka.Zoom.private.function.sumMatrixs(sumMatrix, elementMatrix);
