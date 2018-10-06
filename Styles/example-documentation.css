@@ -1,0 +1,81 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: arial;
+}
+
+.title {
+    float: left;
+    width: 100%;
+    font-size: 34px;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #e4e4e4;
+    color: black;
+    text-align: center;
+    border-bottom: 2px solid #c3c3c3;
+}
+
+.example {
+    float: left;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+span.description {
+    display: inline-block;
+    float: left;
+    text-align: center;
+    width: 100%;
+    font-size: 23px;
+    padding-top: 10px;
+    color: black;
+}
+
+button.try {
+    border: 1px solid #c3c3c3;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
+
+.codes {
+    float: left;
+    width: 100%;
+    background-color: #efefef;
+    text-align: center;
+}
+
+button.try:hover {
+    transform: scale(0.97);
+    border: 1px solid #b3b3b3;
+    background-color: #efefef;
+}
+
+.sub-codes {
+    display: inline-block;
+    text-align: left;
+    max-width: calc(100% - 10px);
+}
+
+pre {
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 100%;
+    border: 1px solid #bfbfbf;
+    overflow: auto;
+}
+
+.try-buttons {
+    float: left;
+    width: 100%;
+    text-align: center;
+}

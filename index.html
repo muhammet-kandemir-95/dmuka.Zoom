@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        dmuka.Zoom - Muhammet Kandemir
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="Styles/example-documentation.css">
+    <link rel="stylesheet" type="text/css" href="Components/dmuka.Zoom/Styles/main.css">
+</head>
+
+<body style="overflow: hidden;">
+    <div class="title">
+        Welcome dmuka.Zoom Documentation
+    </div>
+    <div class="example">
+        <span class="description">Use mouse wheel and mouse move on the picture</span>
+        <div class="codes">
+            <div class="sub-codes">
+                <pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>var</span> zoom <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> dmuka<span style='color:#808030; '>.</span>Zoom<span style='color:#808030; '>(</span><span style='color:#800080; '>{</span>
+    element<span style='color:#800080; '>:</span> document<span style='color:#808030; '>.</span>querySelector<span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>img</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span>
+<span style='color:#800080; '>}</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span></pre>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <img src="code.jpg" style="max-width:100%;display:inline-block;" />
+        </div>
+    </div>
+
+    <script src="Components/dmuka.Zoom/Scripts/main.js"></script>
+    <script>
+        var zoom = new dmuka.Zoom({
+            element: document.querySelector("img")
+        });
+    </script>
+</body>
+
+</html>
