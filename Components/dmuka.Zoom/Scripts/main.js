@@ -24,7 +24,9 @@ dmuka.Zoom = function (parameters) {
             // If added parent then classes will add to parent
             parentClasses: "",
             // If added parent then overflow css will add to parent
-            parentOverflow: "hidden"
+            parentOverflow: "hidden",
+            // If added parent then padding css will add to parent
+            parentPadding: 20
         },
         event: {
             // Running when change zoom on element
@@ -60,6 +62,7 @@ dmuka.Zoom = function (parameters) {
     private.variable.maxZoom = parameters.maxZoom === undefined ? private.variable.maxZoom : parameters.maxZoom;
     private.variable.parentEnable = parameters.parentEnable === undefined ? private.variable.parentEnable : parameters.parentEnable;
     private.variable.parentClasses = parameters.parentClasses === undefined ? private.variable.parentClasses : parameters.parentClasses;
+    private.variable.parentPadding = parameters.parentPadding === undefined ? private.variable.parentPadding : parameters.parentPadding;
     private.event.onZoom = parameters.onZoom === undefined ? private.event.onZoom : parameters.onZoom;
 
     // Get Parameters --END
@@ -164,6 +167,7 @@ dmuka.Zoom = function (parameters) {
             private.variable.DOM.element.style.maxHeight = private.variable.DOM.element.style.maxHeight.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.maxHeight;
             private.variable.DOM.element.style.minHeight = private.variable.DOM.element.style.minHeight.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.minHeight;
             private.variable.DOM.parent.style.overflow = private.variable.parentOverflow;
+            private.variable.DOM.parent.style.padding = private.variable.parentPadding + "px";
             // Copy CSS --END
 
             private.variable.DOM.element.insertAdjacentElement("beforebegin", private.variable.DOM.parent);
@@ -175,7 +179,10 @@ dmuka.Zoom = function (parameters) {
             private.variable.DOM.parent._dmuka.Zoom = me;
 
             private.variable.DOM.parent.addEventListener("mousemove", function (e) {
-                this._dmuka.Zoom.private.function.mousemove.call(this._dmuka.Zoom.private.variable.DOM.element, e);
+                this._dmuka.Zoom.private.function.mousemove.call(this._dmuka.Zoom.private.variable.DOM.element, {
+                    offsetX : e.offsetX - this._dmuka.Zoom.private.variable.parentPadding,
+                    offsetY : e.offsetY - this._dmuka.Zoom.private.variable.parentPadding
+                });
             });
             private.variable.DOM.parent.addEventListener("mousewheel", function (e) {
                 this._dmuka.Zoom.private.function.mousewheel.call(this._dmuka.Zoom.private.variable.DOM.element, e);

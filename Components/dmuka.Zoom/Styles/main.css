@@ -2,6 +2,7 @@
     position: relative;
     box-sizing: border-box;
     border: 1px solid #c5c5c5;
+    cursor: crosshair;
 }
 
 .dmuka-zoom-parent:after {
