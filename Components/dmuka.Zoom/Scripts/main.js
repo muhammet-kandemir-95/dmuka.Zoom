@@ -18,7 +18,7 @@ dmuka.Zoom = function (parameters) {
             // Transform max scale
             maxZoom: 10,
             // Animate enable
-            setTransition: true,
+            transitionEnable: true,
             // Element append to new parent element
             parentEnable: true,
             // If added parent then classes will add to parent
@@ -30,7 +30,11 @@ dmuka.Zoom = function (parameters) {
         },
         event: {
             // Running when change zoom on element
-            onZoom: function (event) {
+            onZoom: function () {
+
+            },
+            // Running when change mouse position on element
+            onMove: function () {
 
             }
         },
@@ -56,7 +60,7 @@ dmuka.Zoom = function (parameters) {
         }
     };
 
-    private.variable.setTransition = parameters.setTransition === undefined ? private.variable.setTransition : parameters.setTransition;
+    private.variable.transitionEnable = parameters.transitionEnable === undefined ? private.variable.transitionEnable : parameters.transitionEnable;
     private.variable.increment = parameters.increment === undefined ? private.variable.increment : parameters.increment;
     private.variable.minZoom = parameters.minZoom === undefined ? private.variable.minZoom : parameters.minZoom;
     private.variable.maxZoom = parameters.maxZoom === undefined ? private.variable.maxZoom : parameters.maxZoom;
@@ -140,6 +144,7 @@ dmuka.Zoom = function (parameters) {
     private.function.mousemove = function (e) {
         var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
         this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
+        this._dmuka.Zoom.private.event.onZoom.call(this._dmuka.Zoom.public);
     };
 
     private.function.init = function () {
@@ -193,7 +198,7 @@ dmuka.Zoom = function (parameters) {
             private.variable.DOM.element.addEventListener("mousewheel", private.function.mousewheel);
         }
 
-        if (private.variable.setTransition === true) {
+        if (private.variable.transitionEnable === true) {
             private.variable.DOM.element.style.transition = "transform 0.1s";
         }
 
