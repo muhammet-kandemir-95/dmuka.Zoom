@@ -148,6 +148,14 @@ dmuka.Zoom = function (parameters) {
             for (var key in private.variable.DOM.element.style) {
                 private.variable.DOM.parent.style[key] = private.variable.DOM.element.style[key];
             }
+            private.variable.DOM.element.style.position = "relative";
+            private.variable.DOM.element.style.left = private.variable.DOM.element.style.right = private.variable.DOM.element.style.top = private.variable.DOM.element.style.bottom = "0px";
+            private.variable.DOM.element.style.width = private.variable.DOM.element.style.width.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.width;
+            private.variable.DOM.element.style.maxWidth = private.variable.DOM.element.style.maxWidth.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.maxWidth;
+            private.variable.DOM.element.style.minWidth = private.variable.DOM.element.style.minWidth.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.minWidth;
+            private.variable.DOM.element.style.height = private.variable.DOM.element.style.height.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.height;
+            private.variable.DOM.element.style.maxHeight = private.variable.DOM.element.style.maxHeight.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.maxHeight;
+            private.variable.DOM.element.style.minHeight = private.variable.DOM.element.style.minHeight.indexOf("%") >= 0 ? "100%" : private.variable.DOM.element.style.minHeight;
             private.variable.DOM.parent.style.overflow = private.variable.parentOverflow;
             // Copy CSS --END
 
