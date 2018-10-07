@@ -171,7 +171,12 @@ dmuka.Zoom = function (parameters) {
 
     private.function.mousemove = function (e) {
         var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
-        this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
+        if (elementMatrix[0] === 1 && elementMatrix[3] === 1) {
+            this.style.transformOrigin = "center center";
+        }
+        else {
+            this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
+        }
         this._dmuka.Zoom.private.event.onMove.call(this._dmuka.Zoom.public);
     };
 
