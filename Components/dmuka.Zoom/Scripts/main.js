@@ -14,11 +14,17 @@ dmuka.Zoom = function (parameters) {
             // Transform scale increment
             increment: 0.3,
             // Transform min scale
-            minZoom: 1,
+            minZoom: 0.2,
             // Transform max scale
             maxZoom: 10,
             // Animate enable
-            setTransition: true
+            setTransition: true,
+            // Element append to new parent element
+            parentEnable: true,
+            // If added parent then classes will add to parent
+            parentClasses: "",
+            // If added parent then overflow css will add to parent
+            parentOverflow: "hidden"
         },
         event: {
             // Running when change zoom on element
@@ -52,6 +58,8 @@ dmuka.Zoom = function (parameters) {
     private.variable.increment = parameters.increment === undefined ? private.variable.increment : parameters.increment;
     private.variable.minZoom = parameters.minZoom === undefined ? private.variable.minZoom : parameters.minZoom;
     private.variable.maxZoom = parameters.maxZoom === undefined ? private.variable.maxZoom : parameters.maxZoom;
+    private.variable.parentEnable = parameters.parentEnable === undefined ? private.variable.parentEnable : parameters.parentEnable;
+    private.variable.parentClasses = parameters.parentClasses === undefined ? private.variable.parentClasses : parameters.parentClasses;
     private.event.onZoom = parameters.onZoom === undefined ? private.event.onZoom : parameters.onZoom;
 
     // Get Parameters --END
@@ -114,20 +122,58 @@ dmuka.Zoom = function (parameters) {
         // Check max zoom
         lastMatrix[0] = Math.min(this._dmuka.Zoom.private.variable.maxZoom, lastMatrix[0]);
         lastMatrix[3] = Math.min(this._dmuka.Zoom.private.variable.maxZoom, lastMatrix[3]);
+        // Check distance by one
+        if (Math.abs(lastMatrix[0] - 1) < this._dmuka.Zoom.private.variable.increment) {
+            lastMatrix[0] = 1;
+        }
+        if (Math.abs(lastMatrix[3] - 1) < this._dmuka.Zoom.private.variable.increment) {
+            lastMatrix[3] = 1;
+        }
 
         this.style.transform = this._dmuka.Zoom.private.function.getCssFromMatrix(lastMatrix);
         this._dmuka.Zoom.private.event.onZoom.call(this._dmuka.Zoom.public);
     };
 
+    private.function.mousemove = function (e) {
+        var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
+        this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
+    };
+
     private.function.init = function () {
+        if (private.variable.parentEnable === true) {
+            private.variable.DOM.parent = document.createElement("div");
+            private.variable.DOM.parent.setAttribute("class", "dmuka-zoom-parent " + private.variable.parentClasses);
+
+            // Copy CSS --BEGIN
+            for (var key in private.variable.DOM.element.style) {
+                private.variable.DOM.parent.style[key] = private.variable.DOM.element.style[key];
+            }
+            private.variable.DOM.parent.style.overflow = private.variable.parentOverflow;
+            // Copy CSS --END
+
+            private.variable.DOM.element.insertAdjacentElement("beforebegin", private.variable.DOM.parent);
+            private.variable.DOM.parent.appendChild(private.variable.DOM.element);
+
+            if (private.variable.DOM.parent._dmuka === undefined)
+                private.variable.DOM.parent._dmuka = {};
+
+            private.variable.DOM.parent._dmuka.Zoom = me;
+
+            private.variable.DOM.parent.addEventListener("mousemove", function (e) {
+                this._dmuka.Zoom.private.function.mousemove.call(this._dmuka.Zoom.private.variable.DOM.element, e);
+            });
+            private.variable.DOM.parent.addEventListener("mousewheel", function (e) {
+                this._dmuka.Zoom.private.function.mousewheel.call(this._dmuka.Zoom.private.variable.DOM.element, e);
+            });
+        }
+        else {
+            private.variable.DOM.element.addEventListener("mousemove", private.function.mousemove);
+            private.variable.DOM.element.addEventListener("mousewheel", private.function.mousewheel);
+        }
+
         if (private.variable.setTransition === true) {
             private.variable.DOM.element.style.transition = "transform 0.1s";
         }
-
-        private.variable.DOM.element.addEventListener("mousemove", function (e) {
-            this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
-        });
-        private.variable.DOM.element.addEventListener("mousewheel", private.function.mousewheel);
 
         private.function.mousewheel.call(private.variable.DOM.element);
     };

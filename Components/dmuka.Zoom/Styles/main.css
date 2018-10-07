@@ -1,0 +1,14 @@
+.dmuka-zoom-parent {
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid #c5c5c5;
+}
+
+.dmuka-zoom-parent:after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
