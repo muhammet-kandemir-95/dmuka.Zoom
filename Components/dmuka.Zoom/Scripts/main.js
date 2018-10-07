@@ -113,7 +113,7 @@ dmuka.Zoom = function (parameters) {
     };
 
     private.function.mousewheel = function (e) {
-        var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
+        var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this);
         var sumMatrix = [0, 0, 0, 0, 0, 0, 0];
         if (e !== undefined) {
             if (e.wheelDelta < 0) {
@@ -144,11 +144,21 @@ dmuka.Zoom = function (parameters) {
         this._dmuka.Zoom.private.event.onZoom.call(this._dmuka.Zoom.public);
     };
     public.zoomIn = function () {
+        var elementMatrix = private.function.getMatrixFromElement(private.variable.DOM.element);
+        if (elementMatrix[0] === 1 && elementMatrix[3] === 1) {
+            private.variable.DOM.element.style.transformOrigin = "center center";
+        }
+
         private.function.mousewheel.call(private.variable.DOM.element, {
             wheelDelta: 1
         });
     };
     public.zoomOut = function () {
+        var elementMatrix = private.function.getMatrixFromElement(private.variable.DOM.element);
+        if (elementMatrix[0] === 1 && elementMatrix[3] === 1) {
+            private.variable.DOM.element.style.transformOrigin = "center center";
+        }
+
         private.function.mousewheel.call(private.variable.DOM.element, {
             wheelDelta: -1
         });
@@ -170,13 +180,7 @@ dmuka.Zoom = function (parameters) {
     };
 
     private.function.mousemove = function (e) {
-        var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
-        if (elementMatrix[0] === 1 && elementMatrix[3] === 1) {
-            this.style.transformOrigin = "center center";
-        }
-        else {
-            this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
-        }
+        this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
         this._dmuka.Zoom.private.event.onMove.call(this._dmuka.Zoom.public);
     };
 
