@@ -2,12 +2,12 @@
 
  Demo : http://www.bilgisayarafisildayanadam.com/dmuka.Zoom/
  
- Tarayıcı üzerindeki nesneler üzerine kolayca "Zoom" özelliği eklemenizi sağlar. Bu sayede nesnenizin üzerine farenin ortasını yuvarladığınız takdirde nesneye yakınlaşabilir veya uzaklaşabilirsiniz. Örnek kullanımlar;
+ It helps you to add "Zoom" feature to the subjects on browser. By this way, through rolling the mouse cross ball, you can zoom in and zoom out the subject. Example Usage;
  
- * Ürün Resimleri
- * Kitap Sayfaları
- * Dökümanlar
- * Detaylı Resim İncelemeleri
+ * Product images
+ * Book pages
+ * Documents
+ * Detailed Picture Screening
  
 ## Create Instance
 
@@ -95,7 +95,7 @@ zoom.DOM = {
 ## Public Functions
 
 ### zoom.zoomIn
-Bu fonksiyon ile nesnenin yakınlaştırma komutunu çağırabilirsiniz. Template is represented below;
+Via this function, you can activate the zoom in command of the subject. Template is represented below;
 ```javascript
 function zoom.zoomIn() {
   // codes
@@ -110,7 +110,7 @@ zoom.zoomIn();
 ```
 
 ### zoom.zoomOut
-Bu fonksiyon ile nesnenin uzaklaştırma komutunu çağırabilirsiniz. Template is represented below;
+Via this function you can activate the zoom out command of the subject. Template is represented below;
 ```javascript
 function zoom.zoomOut() {
   // codes
@@ -125,7 +125,7 @@ zoom.zoomOut();
 ```
 
 ### zoom.zoomClear
-Bu fonksiyon ile nesnenin uzaklığını başlangıca getirmeyi sağlayabilirsiniz. Template is represented below;
+Via this function you can reset the zoom command of the subject. Template is represented below;
 ```javascript
 function zoom.zoomClear() {
   // codes
