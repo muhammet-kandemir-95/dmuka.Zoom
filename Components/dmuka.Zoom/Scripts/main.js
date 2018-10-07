@@ -54,9 +54,11 @@ dmuka.Zoom = function (parameters) {
     // Get Parameters --BEGIN
 
     private.variable.DOM.element = parameters.element === undefined ? private.variable.DOM.element : parameters.element;
-    public.element = {
-        get: function () {
-            return private.variable.DOM.element;
+    public.DOM = {
+        element: {
+            get: function () {
+                return private.variable.DOM.element;
+            }
         }
     };
 
@@ -141,6 +143,31 @@ dmuka.Zoom = function (parameters) {
         this.style.transform = this._dmuka.Zoom.private.function.getCssFromMatrix(lastMatrix);
         this._dmuka.Zoom.private.event.onZoom.call(this._dmuka.Zoom.public);
     };
+    public.zoomIn = function () {
+        private.function.mousewheel.call(private.variable.DOM.element, {
+            wheelDelta: 1
+        });
+    };
+    public.zoomOut = function () {
+        private.function.mousewheel.call(private.variable.DOM.element, {
+            wheelDelta: -1
+        });
+    };
+    public.zoomClear = function () {
+        var elementMatrix = private.function.getMatrixFromElement(private.variable.DOM.element);
+        elementMatrix[0] = 1;
+        elementMatrix[3] = 1;
+        var lastMatrix = elementMatrix;
+        // Check min zoom
+        lastMatrix[0] = Math.max(private.variable.minZoom, lastMatrix[0]);
+        lastMatrix[3] = Math.max(private.variable.minZoom, lastMatrix[3]);
+        // Check max zoom
+        lastMatrix[0] = Math.min(private.variable.maxZoom, lastMatrix[0]);
+        lastMatrix[3] = Math.min(private.variable.maxZoom, lastMatrix[3]);
+
+        private.variable.DOM.element.style.transform = private.function.getCssFromMatrix(lastMatrix);
+        private.event.onZoom.call(public);
+    };
 
     private.function.mousemove = function (e) {
         var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
@@ -151,6 +178,11 @@ dmuka.Zoom = function (parameters) {
     private.function.init = function () {
         if (private.variable.parentEnable === true) {
             private.variable.DOM.parent = document.createElement("div");
+            public.DOM.parent = {
+                get: function () {
+                    return private.variable.DOM.parent;
+                }
+            };
             private.variable.DOM.parent.setAttribute("class", "dmuka-zoom-parent " + private.variable.parentClasses);
 
             // Copy CSS --BEGIN
@@ -186,8 +218,8 @@ dmuka.Zoom = function (parameters) {
 
             private.variable.DOM.parent.addEventListener("mousemove", function (e) {
                 this._dmuka.Zoom.private.function.mousemove.call(this._dmuka.Zoom.private.variable.DOM.element, {
-                    offsetX : e.offsetX - this._dmuka.Zoom.private.variable.parentPadding,
-                    offsetY : e.offsetY - this._dmuka.Zoom.private.variable.parentPadding
+                    offsetX: e.offsetX - this._dmuka.Zoom.private.variable.parentPadding,
+                    offsetY: e.offsetY - this._dmuka.Zoom.private.variable.parentPadding
                 });
             });
             private.variable.DOM.parent.addEventListener("mousewheel", function (e) {
