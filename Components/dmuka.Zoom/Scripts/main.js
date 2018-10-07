@@ -68,6 +68,7 @@ dmuka.Zoom = function (parameters) {
     private.variable.parentClasses = parameters.parentClasses === undefined ? private.variable.parentClasses : parameters.parentClasses;
     private.variable.parentPadding = parameters.parentPadding === undefined ? private.variable.parentPadding : parameters.parentPadding;
     private.event.onZoom = parameters.onZoom === undefined ? private.event.onZoom : parameters.onZoom;
+    private.event.onMove = parameters.onMove === undefined ? private.event.onMove : parameters.onMove;
 
     // Get Parameters --END
 
