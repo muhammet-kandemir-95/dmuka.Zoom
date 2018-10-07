@@ -96,13 +96,15 @@ dmuka.Zoom = function (parameters) {
 
     private.function.mousewheel = function (e) {
         var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this._dmuka.Zoom.private.variable.DOM.element);
-        var sumMatrix = [];
-        if (e.wheelDelta < 0) {
-            //scroll down
-            sumMatrix = [-1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, -1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
-        } else {
-            //scroll up
-            sumMatrix = [1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, 1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
+        var sumMatrix = [0, 0, 0, 0, 0, 0, 0];
+        if (e !== undefined) {
+            if (e.wheelDelta < 0) {
+                //scroll down
+                sumMatrix = [-1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, -1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
+            } else {
+                //scroll up
+                sumMatrix = [1 * elementMatrix[0] * this._dmuka.Zoom.private.variable.increment, 0, 0, 1 * elementMatrix[3] * this._dmuka.Zoom.private.variable.increment, 0, 0];
+            }
         }
 
         var lastMatrix = this._dmuka.Zoom.private.function.sumMatrixs(sumMatrix, elementMatrix);
@@ -126,6 +128,8 @@ dmuka.Zoom = function (parameters) {
             this.style.transformOrigin = e.offsetX + "px " + e.offsetY + "px";
         });
         private.variable.DOM.element.addEventListener("mousewheel", private.function.mousewheel);
+
+        private.function.mousewheel.call(private.variable.DOM.element);
     };
     private.function.init();
 
