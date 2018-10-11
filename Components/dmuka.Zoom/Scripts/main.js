@@ -113,6 +113,8 @@ dmuka.Zoom = function (parameters) {
     };
 
     private.function.mousewheel = function (e) {
+        e.preventDefault();
+        
         var elementMatrix = this._dmuka.Zoom.private.function.getMatrixFromElement(this);
         var sumMatrix = [0, 0, 0, 0, 0, 0, 0];
         if (e !== undefined) {
