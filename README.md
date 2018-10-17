@@ -15,7 +15,7 @@
 Name | Type | Default Value | Description
 ---- | ---- | ------------- | -----------
   **element** | _HTML Element_ | document.body | Target element.
-  **increment** | _float_ | 0.3 | Scale x and scale y incerement value.
+  **increment** | _float_ | 0.3 | Scale x and scale y increment value.
   **minZoom** | _float_ | 0.2 | Minimum scale x and minimum scale y value.
   **maxZoom** | _float_ | 10 | Maximum scale x and minimum scale y value.
   **transitionEnable** | _boolean_ | true | Animation enable.
