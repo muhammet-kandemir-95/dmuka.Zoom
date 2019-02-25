@@ -1,6 +1,6 @@
 # dmuka.Zoom
 
- Demo : http://www.bilgisayarafisildayanadam.com/dmuka.Zoom/
+ Demo : https://muhammet-kandemir-95.github.io/dmuka.Zoom/
  
  It helps you to add "Zoom" feature to the subjects on browser. By this way, through rolling the mouse cross ball, you can zoom in and zoom out the subject. Example Usage;
  
